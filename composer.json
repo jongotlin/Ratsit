@@ -1,7 +1,7 @@
 {
   "name": "jongotlin/ratsit",
   "license": "MIT",
-  "type": "api wrapper",
+  "type": "api-wrapper",
   "authors": [
     {
       "name": "Jon Gotlin",
