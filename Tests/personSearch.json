@@ -1,0 +1,19 @@
+{
+  "extendedResult": {
+    "recordsReturned": 1,
+    "totalRecordsFound": 1,
+    "records": [
+      {
+        "ssn": "194107081111",
+        "firstName": "Per Fredrik",
+        "givenName": "Per",
+        "lastName": "Hedlund",
+        "street": "Åkervägen 2 lgh 1202",
+        "zipCode": "26051",
+        "city": "EKEBY",
+        "municipality": "Helsingborg",
+        "age": 75
+      }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "responseCode": "Ok",
+  "responseMessage": "",
+  "ssnStatus": "Active",
+  "basic": {
+    "firstName": "Per Fredrik",
+    "givenName": "Per",
+    "surName": "Hedlund",
+    "middleName": "H",
+    "lastName": "Hedlund",
+    "co": "co",
+    "street": "Åkervägen 2 lgh 1202",
+    "zipCode": "26051",
+    "city": "EKEBY"
+  },
+  "phoneNumbers": {
+    "phoneNumbers": [
+      "070-4107021",
+      "070-4107024",
+      "070-4107027",
+      "070-4107030",
+      "070-4107033",
+      "070-4107036",
+      "070-4107039",
+      "070-4107042",
+      "070-4107045"
+    ]
+  }
+}
