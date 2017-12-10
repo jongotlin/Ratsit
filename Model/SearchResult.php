@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JGI\Ratsit\Model;
 
-class SearchResult implements \IteratorAggregate
+class SearchResult implements \IteratorAggregate, \Countable
 {
     /**
      * @var array
@@ -76,4 +76,11 @@ class SearchResult implements \IteratorAggregate
         return null;
     }
 
+    /**
+     * @return int
+     */
+    public function count(): int
+    {
+        return count($this->data);
+    }
 }
