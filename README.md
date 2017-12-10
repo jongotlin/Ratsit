@@ -1,5 +1,7 @@
 # Ratsit/Checkbiz API wrapper
 
+[![Build Status](https://img.shields.io/travis/jongotlin/Ratsit/master.svg)](https://travis-ci.org/jongotlin/Ratsit)
+
 ## Installation
 ```bash
 $ composer require jongotlin/ratsit
