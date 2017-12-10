@@ -39,13 +39,21 @@ class Ratsit
     ];
 
     /**
-     * @param HttpClient $httpClient
+     * @param string $token
      * @param array $options
      */
-    public function __construct(HttpClient $httpClient, array $options = [])
+    public function __construct(string $token, array $options = [])
+    {
+        $options['token'] = $token;
+        $this->setOptions($options);
+    }
+
+    /**
+     * @param HttpClient $httpClient
+     */
+    public function setHttpClient(HttpClient $httpClient): void
     {
         $this->httpClient = $httpClient;
-        $this->setOptions($options);
     }
 
     /**
