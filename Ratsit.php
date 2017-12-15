@@ -7,6 +7,7 @@ namespace JGI\Ratsit;
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\RequestFactory;
+use JGI\Ratsit\Model\SearchResult;
 
 class Ratsit
 {
@@ -140,7 +141,7 @@ class Ratsit
      * @param null|string $who
      * @param null|string $where
      *
-     * @return Model\Person[]
+     * @return Model\Person[]|SearchResult
      */
     public function searchPerson(?string $who, ?string $where = null)
     {
