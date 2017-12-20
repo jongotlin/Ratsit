@@ -70,7 +70,8 @@ class DenormalizerTest extends TestCase
         $this->assertNull($person->getAddress()->getCo());
         $this->assertEquals('26051', $person->getAddress()->getPostalCode());
         $this->assertEquals('EKEBY', $person->getAddress()->getCity());
-        $this->assertEquals(0, count($person->getPhoneNumbers()));
+        $this->assertEquals(9, count($person->getPhoneNumbers()));
+        $this->assertEquals('070-4107021', $person->getPhoneNumbers()[0]);
         $this->assertNull($person->getBirthDate());
     }
 

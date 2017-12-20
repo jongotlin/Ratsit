@@ -62,6 +62,7 @@ class Denormalizer
             $address->setPostalCode($row['zipCode']);
             $address->setCity($row['city']);
             $person->setAddress($address);
+            $person->setPhoneNumbers($row['phoneNumbers']);
             $persons->add($person);
         }
 
