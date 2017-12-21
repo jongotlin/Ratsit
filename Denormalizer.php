@@ -68,7 +68,6 @@ class Denormalizer
             $persons->add($person);
         }
 
-        echo json_encode($data);Exit();
         return $persons;
     }
 }
