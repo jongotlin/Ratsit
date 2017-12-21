@@ -62,10 +62,13 @@ class Denormalizer
             $address->setPostalCode($row['zipCode']);
             $address->setCity($row['city']);
             $person->setAddress($address);
-            $person->setPhoneNumbers($row['phoneNumbers']);
+            if (array_key_exists('phoneNumbers', $row)) { // Ratsit only return phone numbers if only one person is found
+                $person->setPhoneNumbers($row['phoneNumbers']);
+            }
             $persons->add($person);
         }
 
+        echo json_encode($data);Exit();
         return $persons;
     }
 }
