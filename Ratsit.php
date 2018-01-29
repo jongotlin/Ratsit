@@ -7,7 +7,10 @@ namespace JGI\Ratsit;
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\RequestFactory;
+use JGI\Ratsit\Event\PersonInformationResultEvent;
+use JGI\Ratsit\Event\PersonSearchResultEvent;
 use JGI\Ratsit\Model\SearchResult;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Ratsit
 {
@@ -30,6 +33,11 @@ class Ratsit
      * @var Denormalizer
      */
     private $denormalizer;
+
+    /**
+     * @var EventDispatcherInterface|null
+     */
+    private $eventDispatcher;
 
     /**
      * @var array
@@ -55,6 +63,14 @@ class Ratsit
     public function setHttpClient(HttpClient $httpClient): void
     {
         $this->httpClient = $httpClient;
+    }
+
+    /**
+     * @param null|EventDispatcherInterface $eventDispatcher
+     */
+    public function setEventDispatcher(?EventDispatcherInterface $eventDispatcher): void
+    {
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -134,7 +150,15 @@ class Ratsit
     {
         $json = $this->request('personinformation', 'personinformation', ['ssn' => $ssn])->getBody()->getContents();
 
-        return $this->getDenormalizer()->denormalizerPersonInformation(json_decode($json, true));
+        $person = $this->getDenormalizer()->denormalizerPersonInformation(json_decode($json, true));
+
+        if ($this->eventDispatcher) {
+            $this->eventDispatcher->dispatch(
+                PersonInformationResultEvent::NAME, new PersonInformationResultEvent($person)
+            );
+        }
+
+        return $person;
     }
 
     /**
@@ -147,6 +171,14 @@ class Ratsit
     {
         $json = $this->request('personsearch', 'personsok', ['who' => $who, 'where' => $where])->getBody()->getContents();
 
-        return $this->getDenormalizer()->denormalizerPersonSearch(json_decode($json, true));
+        $searchResult = $this->getDenormalizer()->denormalizerPersonSearch(json_decode($json, true));
+
+        if ($this->eventDispatcher) {
+            $this->eventDispatcher->dispatch(
+                PersonSearchResultEvent::NAME, new PersonSearchResultEvent($searchResult)
+            );
+        }
+
+        return $searchResult;
     }
 }
