@@ -48,6 +48,21 @@ class RatsitTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldFindCompanyByOrganisationNumber()
+    {
+        $ratsit = new Ratsit('foo');
+        $clientMock = $this->getClient(file_get_contents(__DIR__ . '/companyInformation.json'));
+        $eventDispatcherMock = $this->getMockBuilder(EventDispatcherInterface::class)->getMock();
+        $eventDispatcherMock->expects($this->once())->method('dispatch');
+        $ratsit->setEventDispatcher($eventDispatcherMock);
+        $ratsit->setHttpClient($clientMock);
+
+        $ratsit->findCompanyByOrganisationNumber('000');
+    }
+
+    /**
      * @param string|null $json
      *
      * @return \PHPUnit\Framework\MockObject\MockObject|HttpClient

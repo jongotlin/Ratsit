@@ -1,0 +1,20 @@
+{
+  "responseCode": "Ok",
+  "responseMessage": "",
+  "basic": {
+    "companyName": "Aktiebolaget Gense",
+    "organizationNumber": "5560000043",
+    "co": "co",
+    "street": "BOX 1115",
+    "zipCode": "63180",
+    "city": "ESKILSTUNA",
+    "companyCode": "LimitedCompany",
+    "companyCodeText": "Aktiebolag",
+    "registrationDate": "1897-01-11",
+    "phoneNumber": "016-159000"
+  },
+  "phoneNumbers": {
+    "phoneNumbers": [],
+    "phoneTypes": []
+  }
+}
