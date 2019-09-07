@@ -7,8 +7,10 @@ namespace JGI\Ratsit;
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\RequestFactory;
+use JGI\Ratsit\Event\CompanyInformationResultEvent;
 use JGI\Ratsit\Event\PersonInformationResultEvent;
 use JGI\Ratsit\Event\PersonSearchResultEvent;
+use JGI\Ratsit\Model\Company;
 use JGI\Ratsit\Model\SearchResult;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -180,5 +182,25 @@ class Ratsit
         }
 
         return $searchResult;
+    }
+
+    /**
+     * @param string|null $organisationNumber
+     *
+     * @return Model\Company|null
+     */
+    public function findCompanyByOrganisationNumber(?string $organisationNumber): ?Company
+    {
+        $json = $this->request('companyinformation', 'companyinformation', ['OrganizationNumber' => $organisationNumber])->getBody()->getContents();
+
+        $company = $this->getDenormalizer()->denormalizerCompanyInformation(json_decode($json, true));
+
+        if ($company && $this->eventDispatcher) {
+            $this->eventDispatcher->dispatch(
+                CompanyInformationResultEvent::NAME, new CompanyInformationResultEvent($company)
+            );
+        }
+
+        return $company;
     }
 }

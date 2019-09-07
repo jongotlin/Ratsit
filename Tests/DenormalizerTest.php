@@ -7,6 +7,7 @@ namespace JGI\Ratsit\Tests;
 use JGI\Ratsit\Denormalizer;
 use JGI\Ratsit\Model\Address;
 use JGI\Ratsit\Model\Person;
+use JGI\Ratsit\Model\Company;
 use JGI\Ratsit\Model\SearchResult;
 use PHPUnit\Framework\TestCase;
 
@@ -108,5 +109,24 @@ class DenormalizerTest extends TestCase
             [[]],
             [['foo' => 'bar']],
         ];
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDenormalizeCompanyInformation()
+    {
+        $company = $this->denormalizer->denormalizerCompanyInformation(
+            json_decode(file_get_contents(__DIR__ . '/companyInformation.json'), true)
+        );
+
+        $this->assertInstanceOf(Company::class, $company);
+        $this->assertEquals('Aktiebolaget Gense', $company->getName());
+        $this->assertInstanceOf(Address::class, $company->getAddress());
+        $this->assertEquals('BOX 1115', $company->getAddress()->getStreet());
+        $this->assertEquals('co', $company->getAddress()->getCo());
+        $this->assertEquals('63180', $company->getAddress()->getPostalCode());
+        $this->assertEquals('ESKILSTUNA', $company->getAddress()->getCity());
+        $this->assertEquals('016-159000', $company->getPhoneNumber());
     }
 }

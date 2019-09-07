@@ -6,11 +6,14 @@ namespace JGI\Ratsit;
 
 use JGI\Ratsit\Exception\InvalidJsonException;
 use JGI\Ratsit\Model\Address;
+use JGI\Ratsit\Model\Company;
 use JGI\Ratsit\Model\Person;
 use JGI\Ratsit\Model\SearchResult;
 
 class Denormalizer
 {
+    const RESPONSE_CODE_NOT_FOUND = 'NotFound';
+
     /**
      * @param array|null $data
      *
@@ -38,6 +41,7 @@ class Denormalizer
 
         return $person;
     }
+
     /**
      * @param array|null $data
      *
@@ -69,5 +73,34 @@ class Denormalizer
         }
 
         return $persons;
+    }
+
+
+    /**
+     * @param array|null $data
+     *
+     * @return Company|null
+     */
+    public function denormalizerCompanyInformation(?array $data)
+    {
+        if ($data && array_key_exists('responseCode', $data) && $data['responseCode'] == self::RESPONSE_CODE_NOT_FOUND) {
+            return null;
+        }
+        if (!$data || !array_key_exists('basic', $data)) {
+            throw new InvalidJsonException();
+        }
+
+        $company = new Company();
+        $company->setName($data['basic']['companyName']);
+        $company->setPhoneNumber($data['basic']['phoneNumber']);
+
+        $address = new Address();
+        $address->setStreet($data['basic']['street']);
+        $address->setCo($data['basic']['co']);
+        $address->setPostalCode($data['basic']['zipCode']);
+        $address->setCity($data['basic']['city']);
+        $company->setAddress($address);
+
+        return $company;
     }
 }
