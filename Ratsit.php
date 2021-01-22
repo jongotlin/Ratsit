@@ -45,7 +45,7 @@ class Ratsit
      * @var array
      */
     private static $defaultOptions = [
-        'url' => 'https://api.ratsit.se/api/v1/',
+        'url' => 'https://api.checkbiz.se/api/v1/',
         'token' => '',
     ];
 
