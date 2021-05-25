@@ -50,6 +50,30 @@ class DenormalizerTest extends TestCase
     /**
      * @test
      */
+    public function shouldReturnNullIfPersonInformationWasNotFound()
+    {
+        $person = $this->denormalizer->denormalizerPersonInformation(
+            json_decode(file_get_contents(__DIR__ . '/noPersonInformationFound.json'), true)
+        );
+
+        $this->assertNull($person);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnNullIfIdentityNumberIsInvalid()
+    {
+        $person = $this->denormalizer->denormalizerPersonInformation(
+            json_decode(file_get_contents(__DIR__ . '/invalidIdentityNumber.json'), true)
+        );
+
+        $this->assertNull($person);
+    }
+
+    /**
+     * @test
+     */
     public function shouldDenormalizePersonSearch()
     {
         $persons = $this->denormalizer->denormalizerPersonSearch(
