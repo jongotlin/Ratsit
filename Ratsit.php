@@ -151,10 +151,8 @@ class Ratsit
     public function findPersonBySocialSecurityNumber(?string $ssn)
     {
         $json = $this->request('personinformation', 'personinformation', ['ssn' => $ssn])->getBody()->getContents();
-        file_put_contents('test2', $json);
 
         $person = $this->getDenormalizer()->denormalizerPersonInformation(json_decode($json, true));
-
 
         if ($person && $this->eventDispatcher) {
             $this->eventDispatcher->dispatch(
