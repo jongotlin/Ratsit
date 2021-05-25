@@ -1,0 +1,4 @@
+{
+  "type": "InvalidParameters",
+  "message":"SSN must be 12 digits long and in format yyyymmddnnnc. Contact provider with id 0HM8S5HCU7NK9:000000BE for additional information."
+}

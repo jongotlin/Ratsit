@@ -1,0 +1,4 @@
+{
+  "responseCode": "NotFound",
+  "responseMessage": "Supplied SSN did not match a person"
+}

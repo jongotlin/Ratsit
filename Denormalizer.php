@@ -17,11 +17,17 @@ class Denormalizer
     /**
      * @param array|null $data
      *
-     * @return Person
+     * @return Person|null
      */
-    public function denormalizerPersonInformation(?array $data)
+    public function denormalizerPersonInformation(?array $data): ?Person
     {
         if (!$data || !array_key_exists('basic', $data)) {
+            if ($data && array_key_exists('responseCode', $data) && $data['responseCode'] == self::RESPONSE_CODE_NOT_FOUND) {
+                return null;
+            }
+            if ($data && array_key_exists('type', $data) && $data['type'] == 'InvalidParameters') {
+                return null;
+            }
             throw new InvalidJsonException();
         }
 
