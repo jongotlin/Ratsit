@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace JGI\Ratsit\Event;
 
 use JGI\Ratsit\Model\Person;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class PersonInformationResultEvent extends Event
 {

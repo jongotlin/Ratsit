@@ -151,14 +151,12 @@ class Ratsit
     public function findPersonBySocialSecurityNumber(?string $ssn)
     {
         $json = $this->request('personinformation', 'personinformation', ['ssn' => $ssn])->getBody()->getContents();
-        file_put_contents('test2', $json);
 
         $person = $this->getDenormalizer()->denormalizerPersonInformation(json_decode($json, true));
 
-
         if ($person && $this->eventDispatcher) {
             $this->eventDispatcher->dispatch(
-                PersonInformationResultEvent::NAME, new PersonInformationResultEvent($person)
+                new PersonInformationResultEvent($person), PersonInformationResultEvent::NAME
             );
         }
 
@@ -179,7 +177,7 @@ class Ratsit
 
         if ($this->eventDispatcher) {
             $this->eventDispatcher->dispatch(
-                PersonSearchResultEvent::NAME, new PersonSearchResultEvent($searchResult)
+                new PersonSearchResultEvent($searchResult), PersonSearchResultEvent::NAME
             );
         }
 
@@ -199,7 +197,7 @@ class Ratsit
 
         if ($company && $this->eventDispatcher) {
             $this->eventDispatcher->dispatch(
-                CompanyInformationResultEvent::NAME, new CompanyInformationResultEvent($company)
+                new CompanyInformationResultEvent($company), CompanyInformationResultEvent::NAME
             );
         }
 

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace JGI\Ratsit\Event;
 
-use JGI\Ratsit\Model\Person;
 use JGI\Ratsit\Model\SearchResult;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class PersonSearchResultEvent extends Event
 {
