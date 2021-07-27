@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace JGI\Ratsit\Tests;
 
 use JGI\Ratsit\Denormalizer;
+use JGI\Ratsit\Exception\InvalidJsonException;
 use JGI\Ratsit\Model\Address;
 use JGI\Ratsit\Model\Person;
 use JGI\Ratsit\Model\Company;
@@ -18,7 +19,7 @@ class DenormalizerTest extends TestCase
      */
     private $denormalizer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->denormalizer = new Denormalizer();
     }
@@ -103,22 +104,24 @@ class DenormalizerTest extends TestCase
     /**
      * @test
      * @dataProvider invalidPersonProvider
-     * @expectedException \JGI\Ratsit\Exception\InvalidJsonException
-     * @expectedExceptionMessage Provided json is invalid
      */
     public function shouldThrowExceptionIfPersonInformationFormatIsNotCorrect($data)
     {
+        $this->expectException(InvalidJsonException::class);
+        $this->expectExceptionMessage('Provided json is invalid');
+
         $this->denormalizer->denormalizerPersonInformation($data);
     }
 
     /**
      * @test
      * @dataProvider invalidPersonProvider
-     * @expectedException \JGI\Ratsit\Exception\InvalidJsonException
-     * @expectedExceptionMessage Provided json is invalid
      */
     public function shouldThrowExceptionIfPersonSearchFormatIsNotCorrect($data)
     {
+        $this->expectException(InvalidJsonException::class);
+        $this->expectExceptionMessage('Provided json is invalid');
+
         $this->denormalizer->denormalizerPersonSearch($data);
     }
 
